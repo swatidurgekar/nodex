@@ -101,11 +101,22 @@ background-repeat:none;
     <script>
     function onsignup(event){
         event.preventDefault();
-        localStorage.setItem('name',document.getElementById('fname').value);
-        localStorage.setItem('email',document.getElementById('email').value);
-        localStorage.setItem('phone number',document.getElementById('phone').value);
-        localStorage.setItem('date',document.getElementById('date').value);
-        localStorage.setItem('time',document.getElementById('time').value);
+        //  localStorage.setItem('name',document.getElementById('fname').value);
+        // // localStorage.setItem('email',document.getElementById('email').value);
+        // // localStorage.setItem('phone number',document.getElementById('phone').value);
+        // // localStorage.setItem('date',document.getElementById('date').value);
+        // // localStorage.setItem('time',document.getElementById('time').value);
+        // console.log(localStorage.getItem('name'));
+
+        var obj={
+          name: document.getElementById('fname').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          date: document.getElementById('date').value,
+          time: document.getElementById('time').value
+        }
+        myobj_serialized=JSON.stringify(obj);
+        localStorage.setItem('myobj',myobj_serialized);
     }
 
     const form=document.querySelector("form");
