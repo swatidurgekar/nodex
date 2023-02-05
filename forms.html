@@ -117,6 +117,27 @@ background-repeat:none;
         }
         myobj_serialized=JSON.stringify(obj);
         localStorage.setItem(document.getElementById('email').value,myobj_serialized);
+
+        var li=document.createElement('li');
+        //li.textContent=document.getElementById('email').value;
+        var span=document.createElement('span');
+        span.textContent=document.getElementById('email').value;
+        var deleteBtn=document.createElement('button');
+        deleteBtn.className='btn btn-danger bt-sm delete';
+        deleteBtn.textContent='DELETE';
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+        form.append(li)
+        // console.log(li)
+
+        deleteBtn.addEventListener('click', deletefnc);
+
+      function deletefnc(e) {
+        // console.log(e.target.parentElement.firstChild.textContent)
+        e.target.parentElement.remove();
+        localStorage.removeItem(e.target.parentElement.firstChild.textContent)
+
+      }
     }
 
     const form=document.querySelector("form");
@@ -128,6 +149,8 @@ background-repeat:none;
 
         form.classList.add('was-validated')
     })
+
+    
     </script>
 </body>
 </html>
