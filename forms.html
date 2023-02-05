@@ -86,7 +86,7 @@ background-repeat:none;
 </div><br/>
 
 <div class="form-floating">
-<input type="number" name="phone" id="phone" class="form-control" placeholder="999999999" required><br/>
+<input type="number" name="phone" id="phone" class="form-control" placeholder="999999999" min="0" required><br/>
 <label for="phone" >Phone:</label><br/>
 </div>
 
@@ -116,7 +116,7 @@ background-repeat:none;
           time: document.getElementById('time').value
         }
         myobj_serialized=JSON.stringify(obj);
-        localStorage.setItem('myobj',myobj_serialized);
+        localStorage.setItem(document.getElementById('email').value,myobj_serialized);
     }
 
     const form=document.querySelector("form");
