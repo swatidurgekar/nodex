@@ -90,10 +90,6 @@ background-repeat:none;
 <label for="phone" >Phone:</label><br/>
 </div>
 
-<input type="date" name="date" id="date"  required>
-
-<input type="time" name="time" id="time" ><br/>
-<label for="date" ></label><br/>
 <button class="btn btn-primary" type="submit">Submit</button>
 
 </form>
@@ -101,44 +97,58 @@ background-repeat:none;
     <script>
     function onsignup(event){
         event.preventDefault();
-        //  localStorage.setItem('name',document.getElementById('fname').value);
-        // // localStorage.setItem('email',document.getElementById('email').value);
-        // // localStorage.setItem('phone number',document.getElementById('phone').value);
-        // // localStorage.setItem('date',document.getElementById('date').value);
-        // // localStorage.setItem('time',document.getElementById('time').value);
-        // console.log(localStorage.getItem('name'));
 
         var obj={
           name: document.getElementById('fname').value,
           email: document.getElementById('email').value,
           phone: document.getElementById('phone').value,
-          date: document.getElementById('date').value,
-          time: document.getElementById('time').value
         }
         myobj_serialized=JSON.stringify(obj);
-        localStorage.setItem(document.getElementById('email').value,myobj_serialized);
+        localStorage.setItem(document.getElementById('fname').value,myobj_serialized);
 
         var li=document.createElement('li');
-        //li.textContent=document.getElementById('email').value;
-        var span=document.createElement('span');
-        span.textContent=document.getElementById('email').value;
+        li.id=document.getElementById('fname').value;
+        var span1=document.createElement('span');
+        span1.textContent= document.getElementById('fname').value;
+        var span2=document.createElement('span');
+        span2.textContent= document.getElementById('email').value;
+        var span3=document.createElement('span');
+        span3.textContent= document.getElementById('phone').value;
+        
         var deleteBtn=document.createElement('button');
         deleteBtn.className='btn btn-danger bt-sm delete';
+        var editBtn=document.createElement('button');
+        editBtn.className='btn btn-primary bt-sm edit'
         deleteBtn.textContent='DELETE';
-        li.appendChild(span);
+        editBtn.textContent='EDIT';
+        li.appendChild(span1);
+        li.appendChild(span2);
+        li.appendChild(span3);
         li.appendChild(deleteBtn);
-        form.append(li)
-        // console.log(li)
-
+        li.appendChild(editBtn);
+        form.append(li);
+      
         deleteBtn.addEventListener('click', deletefnc);
-
+        editBtn.addEventListener('click',editfnc);
+      }
       function deletefnc(e) {
-        // console.log(e.target.parentElement.firstChild.textContent)
         e.target.parentElement.remove();
-        localStorage.removeItem(e.target.parentElement.firstChild.textContent)
+        localStorage.removeItem(e.target.parentElement.firstChild.textContent);
 
       }
-    }
+
+      function editfnc(e){
+        e.preventDefault();
+        var list=document.getElementById(e.target.parentElement.firstChild.textContent);
+        var nameinput=document.getElementById('fname');
+        nameinput.value=list.firstChild.textContent;
+        var emailinput=document.getElementById('email');
+        emailinput.value=list.children[1].textContent;
+        var numbinput=document.getElementById('phone');
+        numbinput.value=list.children[2].textContent;
+        localStorage.removeItem(e.target.parentElement.firstChild.textContent);
+        e.target.parentElement.remove();
+      }
 
     const form=document.querySelector("form");
     
